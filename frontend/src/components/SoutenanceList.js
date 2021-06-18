@@ -40,7 +40,7 @@ class SoutenanceList extends Component {
     mapETATS_D.set("A", "En attente");
 
     return (
-      <Table dark>
+      <Table hover dark>
         <thead>
           <tr>
             <th>ID</th>

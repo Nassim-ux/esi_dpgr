@@ -39,10 +39,10 @@ class Home extends Component {
                   <div key="vd" label="Validation">
                     <OngletValidDossier type={"D"} />
                   </div>
-                  <div key="ad" label="Autorisation">
+                  <div key="afd" label="Affectation">
                     vide
                   </div>
-                  <div key="afd" label="Affectation">
+                  <div key="ad" label="Autorisation">
                     vide
                   </div>
                 </Tabs>
@@ -72,10 +72,10 @@ class Home extends Component {
                   <div key="vh" label="Validation">
                     <OngletValidDossier type={"H"} />
                   </div>
-                  <div key="ah" label="Autorisation">
+                  <div key="afh" label="Affectation">
                     vide
                   </div>
-                  <div key="afh" label="Affectation">
+                  <div key="ah" label="Autorisation">
                     vide
                   </div>
                 </Tabs>

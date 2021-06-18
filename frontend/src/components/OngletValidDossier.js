@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
-import SoutenanceList from "./SoutenanceList";
+import XTable from "./SoutenanceTable";
 
 import axios from "axios";
 
@@ -28,15 +28,53 @@ class OngletValidDossier extends Component {
   };
 
   render() {
+    const listHeader = [
+      {
+        Header: "ID",
+        className: "text-left",
+        accessor: "s_id",
+        notShowSortingDisplay: false,
+      },
+      {
+        Header: "Nom Lauréat",
+        accessor: "laureat_nom",
+        className: "text-left",
+      },
+      {
+        Header: "Thème",
+        accessor: "theme",
+        className: "text-left",
+      },
+      {
+        Header: "Sujet",
+        accessor: "sujet",
+        className: "text-center",
+      },
+      {
+        Header: "Dossier",
+        accessor: "dossier_lien",
+        className: "text-left",
+      },
+      {
+        Header: "Etat",
+        accessor: "etat",
+        className: "text-left",
+      },
+      {
+        Header: "Etat du dossier",
+        accessor: "dossier_etat",
+        className: "text-left",
+      },
+    ];
+
     return (
-      <Container style={{ marginTop: "20px" }}>
-        <Row>
-          <Col></Col>
-        </Row>
+      <Container style={{ marginTop: "0px" }}>
         <Row>
           <Col>
-            <SoutenanceList
-              soutenances={this.state.soutenances}
+            <XTable
+              columns={listHeader}
+              loading={false}
+              data={this.state.soutenances}
               resetState={this.resetState}
               type={this.type}
             />
