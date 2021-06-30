@@ -9,12 +9,14 @@ import Tabs from "./Tabs";
 import OngletValidDossier from "./gestionDossier/OngletValidDossier";
 import OngletDesignationJury from "./gestionJury/OngletDesignationJury";
 import Sidebar from "./Sidebar";
+import LogoutModal from "./LogoutModal";
 
 class Home extends Component {
   handler = this.handler.bind(this);
 
   state = {
     sidebar_active: false,
+    modal: false,
   };
 
   handler() {
@@ -22,6 +24,17 @@ class Home extends Component {
       sidebar_active: this.state.sidebar_active ? false : true,
     });
   }
+
+  handleDeco = () => {
+    this.props.resetState(false);
+    this.toggle();
+  };
+
+  toggle = () => {
+    this.setState((previous) => ({
+      modal: !previous.modal,
+    }));
+  };
 
   render() {
     var currentclass = this.state.sidebar_active ? "collapsed" : "expanded";
@@ -33,6 +46,12 @@ class Home extends Component {
         <div className={currentclass}>
           <BrowserRouter>
             <Switch>
+              <Route path="/logout">
+                <LogoutModal
+                  modal={this.state.modal}
+                  toggle={this.toggle}
+                ></LogoutModal>
+              </Route>
               <Route path="/soutenance/doctorat/gestdossier">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
@@ -182,6 +201,7 @@ class Home extends Component {
             <Sidebar
               sidebar_active={this.state.sidebar_active}
               action={this.handler}
+              toggle={this.toggle}
               selected={window.location.pathname.slice(0)}
             />
           </BrowserRouter>

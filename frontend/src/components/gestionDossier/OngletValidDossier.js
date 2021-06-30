@@ -79,6 +79,7 @@ class OngletValidDossier extends Component {
         style={{
           marginTop: "0px",
           marginLeft: "10px",
+          marginRight: "10px",
         }}
       >
         <XTable
