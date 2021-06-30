@@ -71,7 +71,9 @@ class OngletDesignationJury extends Component {
     ];
 
     return (
-      <Container style={{ marginTop: "0px", marginLeft: "10px" }}>
+      <Container
+        style={{ marginTop: "0px", marginLeft: "10px", marginRight: "10px" }}
+      >
         <XTable
           columns={listHeader}
           loading={false}

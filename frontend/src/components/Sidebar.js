@@ -8,6 +8,7 @@ import SideNav, { NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 
 // Be sure to include styles at some point, probably during your bootstraping
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
+import { Button } from "reactstrap";
 
 class Sidebar extends Component {
   selected = this.props.selected;
@@ -25,6 +26,9 @@ class Sidebar extends Component {
             onToggle={this.props.action}
             className="sn"
             onSelect={(selected) => {
+              if (selected === "logout") {
+                this.props.toggle();
+              }
               const to = "/" + selected;
               if (location.pathname !== to) {
                 history.push(to);
@@ -95,7 +99,11 @@ class Sidebar extends Component {
                   <NavText>Habilitation</NavText>
                 </NavItem>
               </NavItem>
-              <NavItem eventKey="logout" className="navitem logout ">
+              <NavItem
+                eventKey="logout"
+                component={Button}
+                className="navitem logout "
+              >
                 <NavIcon>
                   <i
                     className="fa fa-fw fa-sign-out"
