@@ -51,6 +51,17 @@ class Home extends Component {
               <Route path="/soutenance/doctorat/gestjury">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">Doctorat | Gestion des Jurys</h3>
+
+                  
+                <Tabs key="tabD">
+                  <div key="vd" label="Designation">
+                    <OngletDesignationJury type={"D"} />
+                  </div>
+                  <div key="ad" label="Validation">
+                    vide
+                  </div>
+                
+                </Tabs>
               </Route>
               <Route path="/soutenance/doctorat/planning">
                 <h1 className="title tbig">Soutenance</h1>
