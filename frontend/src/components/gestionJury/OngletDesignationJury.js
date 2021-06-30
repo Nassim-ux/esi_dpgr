@@ -6,6 +6,7 @@ import axios from "axios";
 import { API_URL } from "./../../constants";
 
 class OngletDesignationJury extends Component {
+  type=this.props.type;
   state = {
     jurys: [],
   };
