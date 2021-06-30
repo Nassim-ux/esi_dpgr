@@ -9,6 +9,10 @@
   vertical-align: middle;
 }
 
+.table > thead > tr > th {
+  vertical-align: middle;
+}
+
 .table > thead > tr > th.tfilter {
   padding: 2px 5px;
   font-weight: 400;

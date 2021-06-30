@@ -4,7 +4,7 @@ import XTable from "./SoutenanceTable";
 
 import axios from "axios";
 
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
 class OngletValidDossier extends Component {
   type = this.props.type;

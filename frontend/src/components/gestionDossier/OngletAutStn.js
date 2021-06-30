@@ -4,7 +4,7 @@ import SoutenanceList from "./SoutenanceList";
 
 import axios from "axios";
 
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
 class OngletAutStn extends Component {
   type = this.props.type;

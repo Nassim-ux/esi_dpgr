@@ -21,15 +21,15 @@ import {
 } from "reactstrap";
 import axios from "axios";
 
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
 import { matchSorter } from "match-sorter";
 import classNames from "classnames";
-import "../css/Table.css";
-import sortasc from "../images/sort_asc.png";
-import sortdesc from "../images/sort_desc.png";
-import sortboth from "../images/sort_both.png";
-import loaderimage from "../images/loader-table.gif";
+import "../../css/Table.css";
+import sortasc from "../../images/sort_asc.png";
+import sortdesc from "../../images/sort_desc.png";
+import sortboth from "../../images/sort_both.png";
+import loaderimage from "../../images/loader-table.gif";
 
 import ValidDossierModal from "./ValidDossierModal";
 import RefusDossierModal from "./RefusDossierModal";
@@ -360,7 +360,7 @@ const XTable = ({
           </div>
           <div className="div-pagination-2">
             <div className="div-pagination-2-2">
-              Affichage de{" "}
+              Affichage de
               <select
                 className="selectan"
                 value={pageSize}
@@ -373,7 +373,7 @@ const XTable = ({
                     {pageSize}
                   </option>
                 ))}
-              </select>{" "}
+              </select>
               soutenance par page
             </div>
           </div>

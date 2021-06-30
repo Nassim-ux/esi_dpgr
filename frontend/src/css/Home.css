@@ -19,6 +19,8 @@ body {
   position: relative;
   justify-content: end;
   padding-left: 60pt;
+  padding-right: 10pt;
+  padding-inline-end: 10pt;
   top: 50px;
   transition: all 1s ease;
   overflow-y: hidden;
@@ -33,6 +35,8 @@ body {
   position: relative;
   justify-content: end;
   padding-left: 200pt;
+  padding-right: 10pt;
+  padding-inline-end: 10pt;
   overflow-y: hidden;
 }
 

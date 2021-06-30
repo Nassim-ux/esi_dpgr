@@ -26,4 +26,11 @@ urlpatterns = [
     re_path(r'^api/soutenance/updtStnEtat/([0-9])$', views.updt_stn_etat),
     re_path(r'^api/soutenance/getStnListByType/([A-Za-z])$', views.get_stn_list_by_type),
     re_path(r'^api/soutenance/getStnListByEtatD/([A-Za-z])$', views.get_stn_list_by_etatd),
+
+#gestion jury
+    re_path(r'^api/soutenance/getJurys/$', views.jurys_list),
+    re_path(r'^api/soutenance/getjury_list_soutenance/([0-9])', views.jury_list_soutenance),
+    re_path(r'^api/soutenance/createjury_soutenance/$', views.jury_soutenance_Create),
+    re_path(r'^api/soutenance/updatejury_soutenance/([0-9])', views.jury_soutenance_Update),
+    re_path(r'^api/soutenance/deletejury_soutenance/([0-9])', views.jury_soutenance_Delete),
 ]
