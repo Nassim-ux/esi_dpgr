@@ -6,6 +6,7 @@
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   padding: 10px 10px;
+  vertical-align: middle;
 }
 
 .table > thead > tr > th.tfilter {
@@ -18,15 +19,28 @@
 }
 
 .div-pagination {
+  position: relative;
+  top: -10px;
   font-size: 12px;
 }
 
 .div-pagination-2 {
+  position: relative;
+  top: 20px;
+  left: -100px;
+  float: center;
+  text-align: center;
+}
+
+.div-pagination-3 {
+  all: unset;
   float: right;
   text-align: right;
 }
+
 .div-pagination-1 {
   text-align: left;
+  float: left;
 }
 
 .pagina {
@@ -62,28 +76,4 @@
 
 .div-pagination-2-2 .inputan:focus {
   border: 1px solid #dee2e6;
-}
-
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-  .div-pagination-2 {
-    float: none;
-    text-align: left;
-  }
-}
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
 }

@@ -1,19 +1,39 @@
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.collapsed::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .expanded {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   max-width: 100%;
-  margin: 0 auto;
+  height: 100%;
   position: relative;
   justify-content: end;
-  margin-left: 60pt;
+  padding-left: 60pt;
+  top: 50px;
   transition: all 1s ease;
+  overflow-y: hidden;
 }
 
 .collapsed {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   transition: all 1s ease;
   max-width: 100%;
-  margin: 0 auto;
+  top: 50px;
   position: relative;
   justify-content: end;
-  margin-left: 200pt;
+  padding-left: 200pt;
+  overflow-y: hidden;
 }
 
 .title {

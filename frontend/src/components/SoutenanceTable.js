@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 
 import {
   useTable,
@@ -19,6 +19,9 @@ import {
   PaginationItem,
   PaginationLink,
 } from "reactstrap";
+import axios from "axios";
+
+import { API_URL } from "../constants";
 
 import { matchSorter } from "match-sorter";
 import classNames from "classnames";
@@ -41,8 +44,9 @@ function DefaultColumnFilter({
       onChange={(e) => {
         setFilter(e.target.value || undefined);
       }}
-      placeholder="Search..."
+      placeholder="Rechercher..."
       style={{
+        width: "120px",
         fontSize: "10px",
       }}
     />
@@ -55,7 +59,15 @@ function fuzzyTextFilterFn(rows, id, filterValue) {
 
 fuzzyTextFilterFn.autoRemove = (val) => !val;
 
-const XTable = ({ resetState, type, columns, data, loading = true }) => {
+const XTable = ({
+  resetState,
+  resetStateTmp,
+  type,
+  columns,
+  data,
+  data_tmp,
+  loading = true,
+}) => {
   let mapTHEMES = new Map();
   mapTHEMES.set("ML", "Machine Learning");
   mapTHEMES.set("ST", "Systeme d'Information");
@@ -73,6 +85,23 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
   mapETATS_D.set("V", "Validé");
   mapETATS_D.set("R", "Refusé");
   mapETATS_D.set("A", "En attente");
+
+  const pushUpdates = (e) => {
+    e.preventDefault();
+    for (let i = 0; i < data.length; i++) {
+      let dossier = {
+        d_id: data[i].s_id,
+        lien: data[i].dossier_lien,
+        etat: data[i].dossier_etat,
+      };
+
+      axios
+        .put(API_URL + "updtDossierEtat/" + dossier.d_id, dossier)
+        .then(() => {
+          resetState();
+        });
+    }
+  };
 
   const [switchSearch, setSwitchSearch] = useState(false);
   const toggleSwitchSearch = () => {
@@ -132,8 +161,10 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
     usePagination
   );
 
+  data = data_tmp;
+
   return (
-    <>
+    <div style={{ width: "1200px" }}>
       <div>
         <span className="float-right ">
           <CustomInput
@@ -147,7 +178,15 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
           />
         </span>
       </div>
-      <Table {...getTableProps()} hover dark responsive>
+      <Table
+        {...getTableProps()}
+        hover
+        dark
+        responsive
+        style={{
+          width: "1200px",
+        }}
+      >
         <thead>
           {headerGroups.map((headerGroup) => (
             <>
@@ -155,8 +194,11 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render("Header")}
-                    <span style={{ paddingRight: "10px" }}></span>
-                    <span className="float-right">
+
+                    <span
+                      className="float-right"
+                      style={{ float: "right", textAlign: "right" }}
+                    >
                       {!column.notShowSortingDisplay ? (
                         column.isSorted ? (
                           column.isSortedDesc ? (
@@ -223,7 +265,6 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
                   return (
                     <tr>
                       {row.cells.map((cell) => {
-                        console.log(cell);
                         switch (cell.column.id) {
                           case "dossier_etat":
                             return (
@@ -255,13 +296,17 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
                       })}
                       <td align="center">
                         <ValidDossierModal
+                          data={data_tmp}
                           soutenance={soutenance}
                           resetState={resetState}
+                          resetStateTmp={resetStateTmp}
                           type={type}
                         />
                         <RefusDossierModal
+                          data={data_tmp}
                           soutenance={soutenance}
                           resetState={resetState}
+                          resetStateTmp={resetStateTmp}
                           type={type}
                         />
                       </td>
@@ -276,26 +321,6 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
 
       {page.length > 0 && (
         <div className={classNames("div-pagination", { "d-none": loading })}>
-          <div className="div-pagination-2">
-            <div className="div-pagination-2-2">
-              Affichage de{" "}
-              <select
-                className="selectan"
-                value={pageSize}
-                onChange={(e) => {
-                  setPageSize(Number(e.target.value));
-                }}
-              >
-                {[10, 20, 30, 50, 100].map((pageSize) => (
-                  <option key={pageSize} value={pageSize}>
-                    {pageSize}
-                  </option>
-                ))}
-              </select>{" "}
-              soutenance par page
-            </div>
-          </div>
-
           <div className="div-pagination-1">
             Page : {pageIndex + 1} de {pageOptions.length}{" "}
             <Pagination className="pagina">
@@ -331,11 +356,49 @@ const XTable = ({ resetState, type, columns, data, loading = true }) => {
                   gotoPage(page);
                 }}
               />
-            </div>{" "}
+            </div>
+          </div>
+          <div className="div-pagination-2">
+            <div className="div-pagination-2-2">
+              Affichage de{" "}
+              <select
+                className="selectan"
+                value={pageSize}
+                onChange={(e) => {
+                  setPageSize(Number(e.target.value));
+                }}
+              >
+                {[10, 20, 30, 50, 100].map((pageSize) => (
+                  <option key={pageSize} value={pageSize}>
+                    {pageSize}
+                  </option>
+                ))}
+              </select>{" "}
+              soutenance par page
+            </div>
+          </div>
+
+          <div className="div-pagination-3">
+            <Button
+              color="primary"
+              //className="float-right"
+              onClick={pushUpdates}
+              style={{ marginRight: "10px" }}
+            >
+              Enregistrer
+            </Button>
+            <Button
+              outline
+              color="secondary"
+              //className="float-right"
+              onClick={resetState}
+            >
+              Annuler
+            </Button>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Container } from "reactstrap";
 import XTable from "./SoutenanceTable";
 
 import axios from "axios";
@@ -11,6 +11,7 @@ class OngletValidDossier extends Component {
 
   state = {
     soutenances: [],
+    soutenances_tmp: [],
   };
 
   componentDidMount() {
@@ -20,11 +21,17 @@ class OngletValidDossier extends Component {
   getSoutenances = () => {
     axios
       .get(API_URL + "getStnListByType/" + this.type)
-      .then((res) => this.setState({ soutenances: res.data }));
+      .then((res) =>
+        this.setState({ soutenances: res.data, soutenances_tmp: res.data })
+      );
   };
 
   resetState = () => {
     this.getSoutenances();
+  };
+
+  resetStateTmp = (data) => {
+    this.setState({ soutenances_tmp: data });
   };
 
   render() {
@@ -68,18 +75,21 @@ class OngletValidDossier extends Component {
     ];
 
     return (
-      <Container style={{ marginTop: "0px" }}>
-        <Row>
-          <Col>
-            <XTable
-              columns={listHeader}
-              loading={false}
-              data={this.state.soutenances}
-              resetState={this.resetState}
-              type={this.type}
-            />
-          </Col>
-        </Row>
+      <Container
+        style={{
+          marginTop: "0px",
+          marginLeft: "10px",
+        }}
+      >
+        <XTable
+          columns={listHeader}
+          loading={false}
+          data={this.state.soutenances}
+          data_tmp={this.state.soutenances_tmp}
+          resetState={this.resetState}
+          resetStateTmp={this.resetStateTmp}
+          type={this.type}
+        />
       </Container>
     );
   }

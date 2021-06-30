@@ -53,6 +53,8 @@ class RefusDossierModal extends Component {
 
             <ModalBody>
               <EditForm
+                data={this.props.data}
+                resetStateTmp={this.props.resetStateTmp}
                 resetState={this.props.resetState}
                 toggle={this.toggle}
                 soutenance={this.props.soutenance}

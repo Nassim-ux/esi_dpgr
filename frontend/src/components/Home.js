@@ -4,7 +4,7 @@ import "../css/Home.css";
 
 import Header from "./Header";
 import Menu from "./Menu";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Tabs from "./Tabs";
 import OngletValidDossier from "./OngletValidDossier";
 import Sidebar from "./Sidebar";
@@ -26,14 +26,22 @@ class Home extends Component {
     var currentclass = this.state.sidebar_active ? "collapsed" : "expanded";
     return (
       <Fragment>
-        <Header />
+        <div style={{ display: "block" }}>
+          <Header />
+        </div>
         <div className={currentclass}>
           <BrowserRouter>
             <Switch>
               <Route path="/soutenance/doctorat/gestdossier">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Doctorat | Gestion des dossiers de soutenance
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/doctorat"
+                  >
+                    Doctorat
+                  </Link>{" "}
+                  | Gestion des dossiers de soutenance
                 </h3>
                 <Tabs key="tabD">
                   <div key="vd" label="Validation">
@@ -49,24 +57,50 @@ class Home extends Component {
               </Route>
               <Route path="/soutenance/doctorat/gestjury">
                 <h1 className="title tbig">Soutenance</h1>
-                <h3 className="title tsmall">Doctorat | Gestion des Jurys</h3>
+                <h3 className="title tsmall">
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/doctorat"
+                  >
+                    Doctorat
+                  </Link>{" "}
+                  | Gestion des Jurys
+                </h3>
               </Route>
               <Route path="/soutenance/doctorat/planning">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Doctorat | Planning des soutenances
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/doctorat"
+                  >
+                    Doctorat
+                  </Link>{" "}
+                  | Planning des soutenances
                 </h3>
               </Route>
               <Route path="/soutenance/doctorat/archive">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Doctorat | Archive des soutenances
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/doctorat"
+                  >
+                    Doctorat
+                  </Link>{" "}
+                  | Archive des soutenances
                 </h3>
               </Route>
               <Route path="/soutenance/habilitation/gestdossier">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Habilitation | Gestion des dossiers de soutenance
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/habilitation"
+                  >
+                    Habilitation
+                  </Link>{" "}
+                  | Gestion des dossiers de soutenance
                 </h3>
                 <Tabs key="tabH">
                   <div key="vh" label="Validation">
@@ -83,19 +117,37 @@ class Home extends Component {
               <Route path="/soutenance/habilitation/gestjury">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Habilitation | Gestion des Jurys
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/habilitation"
+                  >
+                    Habilitation
+                  </Link>{" "}
+                  | Gestion des Jurys
                 </h3>
               </Route>
               <Route path="/soutenance/habilitation/planning">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Habilitation | Planning des soutenances
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/habilitation"
+                  >
+                    Habilitation
+                  </Link>{" "}
+                  | Planning des soutenances
                 </h3>
               </Route>
               <Route path="/soutenance/habilitation/archive">
                 <h1 className="title tbig">Soutenance</h1>
                 <h3 className="title tsmall">
-                  Habilitation | Archive des soutenances
+                  <Link
+                    style={{ textDecoration: "unset", color: "dodgerblue" }}
+                    to="/soutenance/habilitation"
+                  >
+                    Habilitation
+                  </Link>{" "}
+                  | Archive des soutenances
                 </h3>
               </Route>
               <Route path="/soutenance/doctorat">
