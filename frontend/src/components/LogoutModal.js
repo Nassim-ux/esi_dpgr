@@ -14,7 +14,7 @@ class LogoutModal extends React.Component {
 
           <ModalBody>
             <Link to="/login">
-              <Button color="primary">Se déconnecter</Button>
+              <Button color="danger">Se déconnecter</Button>
             </Link>
             &nbsp;&nbsp;
             <Button onClick={this.props.toggle}>Annuler</Button>

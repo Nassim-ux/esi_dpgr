@@ -7,6 +7,7 @@ import { Table } from "reactstrap";
 
 class JuryListSoutenanceModal extends Component {
   j_id = this.props.j_id;
+  type=this.props.type;
   state = {
     modal: false,
 
@@ -38,7 +39,7 @@ class JuryListSoutenanceModal extends Component {
 
   getSoutenances = () => {
     axios
-      .get(API_URL + "getSoutenances/")
+      .get(API_URL + "getStnListByType/" + this.type)
       .then((res) => this.setState({ soutenances: res.data }));
   };
 
@@ -100,42 +101,49 @@ class JuryListSoutenanceModal extends Component {
                   <th>Etat soutenance</th>
                 </tr>
               </thead>
-              <tbody>
-                {!this.state.jurySnts || this.state.jurySnts.length <= 0 ? (
-                  <tr>
+              
+              {!this.state.jurySnts || this.state.jurySnts.length <= 0 ? (
+                 <tbody>
                     <td colSpan="6" align="center">
                       <b>Ce jury n'est affecté a aucune soutenance</b>
                     </td>
-                  </tr>
-                ) : (
-                  this.state.jurySnts.map((jurySnt) => (
-                    <tr key={jurySnt.js_id}>
-                      <td>{jurySnt.js_id}</td>
-                      <td>{mapROLE.get(jurySnt.role)}</td>
-                      {!this.state.soutenances ||
-                      this.state.soutenances.length <= 0 ? (
-                        <tr>
-                          <td colSpan="6" align="center">
-                            <b>Ce jury n'est affecté a aucune soutenance</b>
-                          </td>
-                        </tr>
-                      ) : (
+                  </tbody>
+                ) : (!this.state.soutenances ||
+                    this.state.soutenances.length <= 0 ? (
+                      <tbody>
+                      <td colSpan="6" align="center">
+                        <b>Ce jury n'est affecté a aucune soutenance</b>
+                      </td>
+                    </tbody>
+                    ) : (
+                      this.state.jurySnts.map((jurySnt) => (
+
                         this.state.soutenances.map(
                           (soutenance) =>
                             soutenance.s_id === jurySnt.soutenance_id && (
-                              <Fragment>
+                              
+                                <tr key={jurySnt.js_id}>
+                          <td>{jurySnt.js_id}</td>
+                          <td>{mapROLE.get(jurySnt.role)}</td>
+                        
                                 <td>{mapTYPE.get(soutenance.type)}</td>
                                 <td>{mapTHEMES.get(soutenance.theme)}</td>
                                 <td>{soutenance.sujet}</td>
                                 <td>{mapETATS.get(soutenance.etat)}</td>
-                              </Fragment>
+                                </tr>
+                              
                             )
                         )
-                      )}
-                    </tr>
-                  ))
-                )}
-              </tbody>
+                        
+                      )
+
+
+
+
+                    )
+                ))
+                      }
+              
             </Table>
           </ModalBody>
         </Modal>

@@ -1,7 +1,7 @@
 //import logo from "./images/logo.svg";
 import "./App.css";
 import React, { Component } from "react";
-import { Redirect, BrowserRouter, Route, Switch } from "react-router-dom";
+import { Redirect, BrowserRouter, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Login from "./components/Login";
