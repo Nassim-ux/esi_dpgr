@@ -14,6 +14,7 @@ class Jury(models.Model):
     domaine_xp = models.CharField("Domaine d'expertise", max_length=70)
     type = models.CharField("Type", max_length=1, choices=TYPES)
     tel_num = models.CharField("Numero de telephone", max_length=15)
+    note = models.IntegerField(blank=True, null=True)
     email = models.EmailField()
     
     def __str__(self):
@@ -27,10 +28,18 @@ class JuryStn(models.Model):
         ('DJ', "Directeur des Jurys"),
         ('DR', "Directeur des Rapporteurs"),
     ]
+
+    ETATS = [
+        ('L', "L"),
+        ('P', "Propose"),
+        ('A', "Accepte"),
+        ('V', "valide"),
+    ] 
     
     js_id = models.IntegerField(unique=True, primary_key=True)
     soutenance_id = models.ForeignKey(to='Soutenance', to_field='s_id', on_delete=models.CASCADE)
     jury_id = models.ForeignKey(to='Jury', to_field='j_id', on_delete=models.CASCADE)
+    etat = models.CharField("Etat", max_length=4, choices=ETATS)
     role = models.CharField("Role", max_length=2, choices=ROLES)
     
     def __str__(self):
